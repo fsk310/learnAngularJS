@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<select ng-model="selectedName" ng-options="x for x in names"></select>
+{{selectedName}}
+<script type="text/javascript">
+    angular.module("myApp", []).controller("myCtrl", function($scope){
+        $scope.names= ["Google", "Baidu", "Bing"];
+    });
+</script>
+</body>
+</html>

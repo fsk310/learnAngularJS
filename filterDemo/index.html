@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="personCtrl">
+        <p>{{firstName | uppercase}}</p>
+        <p>{{lastName | lowercase}}</p>
+        <p>{{2.333 | currency}}</p>
+        <ul>
+           <li ng-repeat="x in list">
+               {{x | myFormat}}
+           </li> 
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var app = angular.module("myApp", []);
+
+        app.service("hexafy", function(){
+            this.myFormat = function(x){
+                return x = "~~~"+x;
+            }
+        });
+
+        app.filter("myFormat",["hexafy", function(hexafy){
+            return function(x){
+                return hexafy.myFormat(x);
+            };
+        }]);
+
+        app.controller("personCtrl", function($scope){
+            $scope.firstName = "Fang";
+            $scope.lastName = "Shukai";
+            $scope.fullName = function(){
+                return $scope.firstName + " " + $scope.lastName;
+            }
+            $scope.list = [1,2,3,4,5,6,7,8,9];
+        });
+    </script>
+</body>
+</html>
